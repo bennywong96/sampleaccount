@@ -23,7 +23,7 @@ public class AccountDBRepository implements AccountRepository {
 	
 	private static final Logger LOGGER = Logger.getLogger(AccountRepository.class);
 	
-
+	Account accountInDB;
 	@PersistenceContext(unitName = "primary")
 	private EntityManager manager;
 
@@ -34,7 +34,7 @@ public class AccountDBRepository implements AccountRepository {
 		LOGGER.info("In AccountDBRepoistory getAllAccounts ");
 		Query query = manager.createQuery("Select a FROM Account a");
 		Collection<Account> accounts = (Collection<Account>) query.getResultList();
-		return util.getJSONForObject(accounts);
+		return util.getJSONForObject(accounts); 
 	}
 
 	@Transactional(REQUIRED)
@@ -73,7 +73,7 @@ public class AccountDBRepository implements AccountRepository {
 			return "{\"message\": \"account sucessfully deleted\"}";
 		}
 		else {
-			LOGGER.warn("updateAccount is null");
+			LOGGER.warn("deleteAccount is null");
 			return "{\"message\": \"Error has occurred\"}";
 		}
 	}
